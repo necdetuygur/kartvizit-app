@@ -6,6 +6,8 @@ import { Card } from '../models/card';
 })
 export class CardService {
   private cards: Card[] = JSON.parse(localStorage.getItem('cards') || '[]');
+  public filteredCards: Card[] = this.cards;
+
   constructor() {}
 
   Get(): Card[] {
@@ -28,5 +30,18 @@ export class CardService {
     card.id = id;
     this.cards.push(card);
     localStorage.setItem('cards', JSON.stringify(this.cards));
+  }
+
+  Filter(query: string) {
+    query = query.toLowerCase();
+    this.filteredCards = this.cards.filter((card) => {
+      return (
+        card.name.toLowerCase().indexOf(query) > -1 ||
+        card.title.toLowerCase().indexOf(query) > -1 ||
+        card.phone.toLowerCase().indexOf(query) > -1 ||
+        card.email.toLowerCase().indexOf(query) > -1 ||
+        card.address.toLowerCase().indexOf(query) > -1
+      );
+    });
   }
 }

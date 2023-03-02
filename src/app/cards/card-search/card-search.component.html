@@ -1,0 +1,10 @@
+<mat-form-field style="width: 400px">
+  <mat-label>Kartvizit Ara</mat-label>
+  <input
+    style="width: 100%"
+    matInput
+    placeholder="İsim Soyisim, Unvan, Telefon, E-Posta, Adres"
+    #searchText
+    (keyup)="search(searchText.value)"
+  />
+</mat-form-field>
