@@ -35,4 +35,5 @@ ng add angular-cli-ghpages
 ng deploy --base-href=https://necdetuygur.github.io/kartvizit-app/
 git stash
 git checkout master
-git branch -D gh-pages```
+git branch -D gh-pages
+```
