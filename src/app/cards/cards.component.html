@@ -7,6 +7,18 @@
   </button>
 </div>
 <div class="row">
+  <div class="col-12" *ngIf="!cardService.Get()">
+    <span>Kartvizitler yükleniyor. Lütfen bekleyiniz.</span>
+  </div>
+  <div class="col-12" *ngIf="cardService.Get()?.length === 0">
+    <span>
+      Henüz kartvizit eklemediniz.
+      <a href="javascript:void(0)" class="text-primary" (click)="openDialog()"
+        >Buraya tıklayarak</a
+      >
+      ilk kartvizitinizi ekleyebilirsiniz.
+    </span>
+  </div>
   <div class="col-md-3 mb-4" *ngFor="let item of cardService.Get()">
     <app-card-item [card]="item"></app-card-item>
   </div>
