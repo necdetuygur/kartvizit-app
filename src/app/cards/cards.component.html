@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center mb-4">
+  <div class="flex-grow-1">
+    <strong>Kartvizitler</strong>
+  </div>
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    Yeni Kartvizit Ekle
+  </button>
+</div>
+<div class="row">
+  <div class="col-md-3 mb-4" *ngFor="let item of cardService.Get()">
+    <app-card-item [card]="item"></app-card-item>
+  </div>
+</div>

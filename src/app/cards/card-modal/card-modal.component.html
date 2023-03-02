@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>
+  {{ data ? "Kartviziti Düzenle" : "Yeni Kartvizit Ekle" }}
+</h2>
+<mat-dialog-content>
+  <div *ngIf="showSpinner">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br />
+  </div>
+  <form class="form" [formGroup]="cardForm">
+    <mat-form-field class="full-width">
+      <mat-label>İsim Soyisim</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Unvan</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Telefon</mat-label>
+      <input matInput formControlName="phone" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>E-Posta</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Adres</mat-label>
+      <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>İptal</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    (click)="data ? updateCard() : addCard()"
+    [disabled]="cardForm.invalid || showSpinner"
+  >
+    Kaydet
+  </button>
+</mat-dialog-actions>
