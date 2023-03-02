@@ -32,4 +32,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ```
 git checkout -b gh-pages
 ng add angular-cli-ghpages
+ng deploy --base-href=https://necdetuygur.github.io/kartvizit-app/
 ```
