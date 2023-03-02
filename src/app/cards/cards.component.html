@@ -1,5 +1,4 @@
 <div class="d-flex align-items-center justify-content-between mb-4">
-  <div class="page-title">Kartvizitler</div>
   <app-card-search class="mr-5"></app-card-search>
   <button mat-raised-button color="primary" (click)="openDialog()">
     Yeni Kartvizit Ekle
@@ -12,9 +11,9 @@
   <div class="col-12" *ngIf="cardService.Get()?.length === 0">
     <span>
       Henüz kartvizit eklemediniz.
-      <a href="javascript:void(0)" class="text-primary" (click)="openDialog()"
-        >Buraya tıklayarak</a
-      >
+      <a href="javascript:void(0)" class="text-primary" (click)="openDialog()">
+        Buraya tıklayarak
+      </a>
       ilk kartvizitinizi ekleyebilirsiniz.
     </span>
   </div>
