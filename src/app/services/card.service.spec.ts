@@ -52,8 +52,19 @@ describe('CardService', () => {
   });
 
   it('should filter cards case-insensitively across all fields', () => {
-    service.add(makeCard({ id: 0, name: 'Ahmet Yılmaz', title: 'Mühendis', phone: '555', email: '', address: '' }));
-    service.add(makeCard({ id: 0, name: 'Ayşe', title: 'Doktor', phone: '111', email: '', address: '' }));
+    service.add(
+      makeCard({
+        id: 0,
+        name: 'Ahmet Yılmaz',
+        title: 'Mühendis',
+        phone: '555',
+        email: '',
+        address: '',
+      }),
+    );
+    service.add(
+      makeCard({ id: 0, name: 'Ayşe', title: 'Doktor', phone: '111', email: '', address: '' }),
+    );
 
     service.filter('ahmet');
     expect(service.filteredCards().length).toBe(1);
@@ -86,14 +97,21 @@ describe('CardService', () => {
   });
 
   it('should keep the active filter after a card is removed', () => {
-    service.add(makeCard({ name: 'Ahmet' }));
-    service.add(makeCard({ name: 'Ahmet Kaya' }));
-    service.add(makeCard({ name: 'Mehmet' }));
-    service.filter('ahmet');
-    expect(service.filteredCards().length).toBe(2);
+    localStorage.setItem(
+      'cards',
+      JSON.stringify([
+        makeCard({ id: 1, name: 'Ahmet' }),
+        makeCard({ id: 2, name: 'Ahmet Kaya' }),
+        makeCard({ id: 3, name: 'Mehmet' }),
+      ]),
+    );
+    const fresh = new CardService();
+    fresh.filter('ahmet');
+    expect(fresh.filteredCards().length).toBe(2);
 
-    service.remove(service.cards()[0].id);
-    expect(service.filteredCards().length).toBe(1);
+    fresh.remove(1);
+    expect(fresh.filteredCards().length).toBe(1);
+    expect(fresh.filteredCards()[0].name).toBe('Ahmet Kaya');
   });
 
   it('should persist cards to localStorage', () => {

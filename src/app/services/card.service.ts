@@ -20,13 +20,12 @@ export class CardService {
         card.title.toLowerCase().indexOf(query) > -1 ||
         card.phone.toLowerCase().indexOf(query) > -1 ||
         card.email.toLowerCase().indexOf(query) > -1 ||
-        card.address.toLowerCase().indexOf(query) > -1
+        card.address.toLowerCase().indexOf(query) > -1,
     );
   });
 
-  add(card: Card): void {
-    card.id = new Date().getTime();
-    this.cards.update((items) => [...items, card]);
+  add(card: Omit<Card, 'id'>): void {
+    this.cards.update((items) => [...items, { ...card, id: new Date().getTime() }]);
     this.persist();
   }
 
@@ -35,10 +34,9 @@ export class CardService {
     this.persist();
   }
 
-  update(id: number, card: Card): void {
+  update(id: number, card: Omit<Card, 'id'>): void {
     this.remove(id);
-    card.id = id;
-    this.cards.update((items) => [...items, card]);
+    this.cards.update((items) => [...items, { ...card, id }]);
     this.persist();
   }
 
