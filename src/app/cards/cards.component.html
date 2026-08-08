@@ -1,0 +1,28 @@
+<div class="row mb-4">
+  <div class="col-md-8">
+    <app-card-search></app-card-search>
+  </div>
+  <div class="col-md-4 text-end">
+    <button mat-raised-button color="primary" (click)="openDialog()">Kartvizit Ekle</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    @if (loading()) {
+      <p>Kartvizitler yükleniyor. Lütfen bekleyiniz.</p>
+    }
+  </div>
+  <div class="col-12">
+    @if (cardService.cards().length === 0) {
+      <button class="btn btn-link p-0" (click)="openDialog()">
+        Henüz kartvizit eklemediniz. Buraya tıklayarak ilk kartvizitinizi ekleyebilirsiniz.
+      </button>
+    }
+  </div>
+  @for (item of cardService.filteredCards(); track item.id) {
+    <div class="col-md-3 mb-4">
+      <app-card-item [card]="item"></app-card-item>
+    </div>
+  }
+</div>
