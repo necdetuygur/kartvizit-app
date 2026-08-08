@@ -10,5 +10,5 @@ import { HeaderComponent } from './components/header/header.component';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('kartvizit-app');
+  readonly title = signal('kartvizit-app');
 }
