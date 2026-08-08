@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{ data ? 'Kartviziti Düzenle' : 'Yeni Kartvizit Ekle' }}</h2>
+<mat-dialog-content>
+  @if (showSpinner()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br />
+  }
+  <form class="form" [formRoot]="cardForm">
+    <mat-form-field class="full-width">
+      <mat-label>İsim Soyisim</mat-label>
+      <input matInput [formField]="cardForm.name" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Unvan</mat-label>
+      <input matInput [formField]="cardForm.title" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Telefon</mat-label>
+      <input matInput [formField]="cardForm.phone" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>E-Posta</mat-label>
+      <input matInput [formField]="cardForm.email" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Adres</mat-label>
+      <textarea matInput [formField]="cardForm.address"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>İptal</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!cardForm().valid() || showSpinner()"
+    (click)="data ? updateCard() : addCard()"
+  >
+    Kaydet
+  </button>
+</mat-dialog-actions>
